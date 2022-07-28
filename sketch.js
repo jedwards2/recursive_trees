@@ -12,8 +12,10 @@ function setup() {
 function mousePressed() {
   for (let i = tree.length - 1; i >= 0; i--) {
     if (!tree[i].finished) {
-      tree.push(tree[i].branchA());
-      tree.push(tree[i].branchB());
+      for (let q = 0; q < random(6); q++) {
+        tree.push(tree[i].branch(generateAngle()));
+      }
+
       tree[i].finished = true;
     }
   }
@@ -24,5 +26,15 @@ function draw() {
   for (let i = 0; i < tree.length; i++) {
     tree[i].jitter();
     tree[i].show();
+  }
+}
+
+function generateAngle() {
+  let angle = random(5) + 2;
+  let randInt = random();
+  if (randInt > 0.5) {
+    return PI / angle;
+  } else {
+    return -PI / angle;
   }
 }
