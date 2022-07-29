@@ -5,7 +5,7 @@ function setup() {
   background(51);
   let a = createVector(width / 2, height);
   let b = createVector(width / 2, height - 100);
-  let root = new Branch(a, b);
+  let root = new Branch(a, b, 10);
   tree[0] = root;
 }
 
@@ -20,7 +20,7 @@ function mousePressed() {
   for (let i = tree.length - 1; i >= 0; i--) {
     if (!tree[i].finished) {
       for (let q = 0; q < random(6); q++) {
-        tree.push(tree[i].branch(generateAngle()));
+        tree.push(tree[i].branch(generateAngle(), tree[i].strokeWeight * 0.67));
       }
       tree[i].finished = true;
     }
