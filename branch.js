@@ -20,16 +20,6 @@ class Branch {
     return right;
   }
 
-  // branchB() {
-  //   let dir = p5.Vector.sub(this.end, this.begin);
-  //   dir.rotate(-PI / 4);
-  //   dir.mult(0.67);
-  //   let newEnd = p5.Vector.add(this.end, dir);
-
-  //   let left = new Branch(this.end, newEnd);
-  //   return left;
-  // }
-
   jitter() {
     this.end.x += random(-1, 1);
     this.end.y += random(-1, 1);
