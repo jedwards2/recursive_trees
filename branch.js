@@ -15,6 +15,7 @@ class Branch {
   branch(angle, strokeWeight) {
     let dir = p5.Vector.sub(this.end, this.begin);
     dir.rotate(angle);
+
     let branchLength = random(1);
     dir.mult(branchLength);
     let newEnd = p5.Vector.add(this.end, dir);

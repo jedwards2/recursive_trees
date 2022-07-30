@@ -1,33 +1,48 @@
-let tree = [];
+let allTrees = [];
 const maxBranchNumber = 2;
-const branchAngleOffset = 8;
+const branchAngleOffset = 10;
 
 function setup() {
   createCanvas(400, 400);
   background(51);
-  let a = createVector(width / 2, height);
-  let b = createVector(width / 2, height - 100);
-  let root = new Branch(a, b, 10);
-  tree[0] = root;
-  for (let i = 0; i < 8; i++) {
-    generateBranches();
+  for (let i = 0; i < 20; i++) {
+    let r = random(width);
+    generateTree(r);
   }
 }
 
 function draw() {
-  for (let i = 0; i < tree.length; i++) {
-    // tree[i].jitter();
-    tree[i].show();
+  for (let i = 0; i < allTrees.length; i++) {
+    for (let q = 0; q < allTrees[i].length; q++) {
+      // tree[i].jitter();
+      allTrees[i][q].show();
+    }
   }
 }
 
-function generateBranches() {
-  for (let i = tree.length - 1; i >= 0; i--) {
-    if (!tree[i].finished) {
+function generateTree(xPos) {
+  let newTree = [];
+  let randomTrunkHeight = random(50);
+  let randomTrunkWidth = random(5);
+  let a = createVector(xPos, height);
+  let b = createVector(xPos, height - (randomTrunkHeight + 50));
+  let root = new Branch(a, b, randomTrunkWidth + 5);
+  newTree.push(root);
+  for (let i = 0; i < 8; i++) {
+    generateBranches(newTree);
+  }
+  allTrees.push(newTree);
+}
+
+function generateBranches(treeArray) {
+  for (let i = treeArray.length - 1; i >= 0; i--) {
+    if (!treeArray[i].finished) {
       for (let q = 0; q < random(maxBranchNumber) + 1; q++) {
-        tree.push(tree[i].branch(generateAngle(), tree[i].strokeWeight * 0.67));
+        treeArray.push(
+          treeArray[i].branch(generateAngle(), treeArray[i].strokeWeight * 0.67)
+        );
       }
-      tree[i].finished = true;
+      treeArray[i].finished = true;
     }
   }
 }
