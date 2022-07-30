@@ -1,4 +1,6 @@
 let tree = [];
+const maxBranchNumber = 2;
+const branchAngleOffset = 8;
 
 function setup() {
   createCanvas(400, 400);
@@ -22,7 +24,7 @@ function draw() {
 function generateBranches() {
   for (let i = tree.length - 1; i >= 0; i--) {
     if (!tree[i].finished) {
-      for (let q = 0; q < random(6) + 1; q++) {
+      for (let q = 0; q < random(maxBranchNumber) + 1; q++) {
         tree.push(tree[i].branch(generateAngle(), tree[i].strokeWeight * 0.67));
       }
       tree[i].finished = true;
@@ -31,7 +33,7 @@ function generateBranches() {
 }
 
 function generateAngle() {
-  let divisor = random(5) + 3;
+  let divisor = random(2) + branchAngleOffset;
   if (random() > 0.5) {
     return PI / divisor;
   }
